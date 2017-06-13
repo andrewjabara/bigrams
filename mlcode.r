@@ -1,3 +1,5 @@
+# thank you to http://www.katrinerk.com/ for the basis of this code
+
 textlines = readLines("documents/words.txt")
 text = scan("documents/words.txt",quote=NULL,what="x")
 
@@ -7,27 +9,28 @@ install.packages("tm")
 library(tm)
 library(NLP)
 # whole text in one string again
-oz.str = paste(text, collapse = " ")
+new.str = paste(text, collapse = " ")
 
 # lowercase everything and to remove punctuation.
 # turn a single text, given as a string, into a tm object:
-oz.corpus = Corpus(VectorSource(oz.str))
-oz.corpus = tm_map(oz.corpus, tolower)
-oz.corpus = tm_map(oz.corpus, removePunctuation, preserve_intra_word_dashes = FALSE)
+new.corpus = Corpus(VectorSource(oz.str))
+new.corpus = tm_map(new.corpus, tolower)
+new.corpus = tm_map(new.corpus, removePunctuation, preserve_intra_word_dashes = FALSE)
 
 # Now change this tm object back into a long string, lowercased and minus the punctuation
-cleaned.oz.str = as.character(oz.corpus)[1]
+cleaned.new.str = as.character(new.corpus)[1]
 
 # split into words
-oz.words = strsplit(cleaned.oz.str, " ", fixed = T)[[1]]
+new.words = strsplit(cleaned.new.str, " ", fixed = T)[[1]]
 
-#Bigram
+#Bigram Code
 # the NLP function "ngrams" returns a list of pairs of words.
-oz.bigrams = vapply(ngrams(oz.words, 2), paste, "", collapse = " ")
-oz.bigram.counts = as.data.frame(xtabs(~oz.bigrams))
-head(oz.bigram.counts[order(oz.bigram.counts$Freq, decreasing = T),])
+new.bigrams = vapply(ngrams(new.words, 2), paste, "", collapse = " ")
+new.bigram.counts = as.data.frame(xtabs(~new.bigrams))
+head(new.bigram.counts[order(new.bigram.counts$Freq, decreasing = T),])
 
-#Trigram
-oz.tri = vapply(ngrams(oz.words, 3), paste, "", collapse = " ")
-oz.tri.counts = as.data.frame(xtabs(~oz.tri))
-head(oz.tri.counts[order(oz.tri.counts$Freq, decreasing = T),])
+#Trigram Code
+#ngrams(new.words, 3) 
+new.tri = vapply(ngrams(new.words, 3), paste, "", collapse = " ")
+new.tri.counts = as.data.frame(xtabs(~new.tri))
+head(new.tri.counts[order(new.tri.counts$Freq, decreasing = T),])
