@@ -1,5 +1,5 @@
-textlines = readLines("documents/Magentofeatures.txt")
-text = scan("documents/Magentofeatures.txt",quote=NULL,what="x")
+textlines = readLines("documents/words.txt")
+text = scan("documents/words.txt",quote=NULL,what="x")
 
 counts = as.data.frame(xtabs(~text))
 
