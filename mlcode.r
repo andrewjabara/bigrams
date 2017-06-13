@@ -34,3 +34,7 @@ head(new.bigram.counts[order(new.bigram.counts$Freq, decreasing = T),])
 new.tri = vapply(ngrams(new.words, 3), paste, "", collapse = " ")
 new.tri.counts = as.data.frame(xtabs(~new.tri))
 head(new.tri.counts[order(new.tri.counts$Freq, decreasing = T),])
+
+#if you want to see more terms than the default amount:
+x=10
+head(new.tri.counts[order(new.tri.counts$Freq, decreasing = T),],x)
